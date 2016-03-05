@@ -7,7 +7,7 @@ system_themedir = $(datadir)/icons/$(theme)
 app_themedir = $(pkgdatadir)/icons/$(theme)
 
 if BUILD_XDG_APP
-system_themedir = app_themedir
+system_themedir = $(app_themedir)
 endif
 
 system_theme_icons = \
