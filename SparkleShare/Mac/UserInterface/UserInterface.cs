@@ -63,7 +63,7 @@ namespace SparkleShare {
                 if (Environment.OSVersion.Version.Major <= 15)
                     return "Helvetica Neue";
 
-                return "SF UI Text";
+                return "Helvetica Neue";
             }
         }
     }
