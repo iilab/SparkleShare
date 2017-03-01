@@ -50,7 +50,8 @@ namespace Sparkles.Git {
                 uri_builder.Scheme = "ssh";
 
             if (RemoteUrl.Host.Equals ("github.com") || // There should be a way to identify hosted gitlab instances.
-                RemoteUrl.Host.Equals ("gitlab.com")) {
+                RemoteUrl.Host.Equals ("gitlab.com") ||
+                RemoteUrl.Host.Equals ("git.iilab.org")) {
 
                 AvailableStorageTypes.Add (
                     new StorageTypeInfo (StorageType.LargeFiles, "Large File Storage",
@@ -426,7 +427,7 @@ namespace Sparkles.Git {
             string clean_command;
 
             if (InstallationInfo.OperatingSystem == OS.Mac) {
-                smudge_command = "env GIT_SSH_COMMAND='" + GIT_SSH_COMMAND + "' " + 
+                smudge_command = "env GIT_SSH_COMMAND='" + GIT_SSH_COMMAND + "' " +
                     Path.Combine (Configuration.DefaultConfiguration.BinPath, "git-lfs") + " smudge %f";
 
                 clean_command = Path.Combine (Configuration.DefaultConfiguration.BinPath, "git-lfs") + " clean %f";
@@ -441,7 +442,7 @@ namespace Sparkles.Git {
 
             var git_config_clean = new GitCommand (TargetFolder,
                 string.Format ("config filter.lfs.clean '{0}'", clean_command));
-            
+
             git_config_required.StartAndWaitForExit ();
             git_config_clean.StartAndWaitForExit ();
             git_config_smudge.StartAndWaitForExit ();
